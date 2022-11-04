@@ -89,11 +89,11 @@ public class ProductoRepositorioImpl implements Repositorio<Producto>{
     }
 
     private Producto crearProducto(ResultSet rs) throws SQLException {
-        Producto p = new Producto();
-        p.setId(rs.getLong("id"));
-        p.setNombre(rs.getString("nombre"));
-        p.setPrecio(rs.getInt("precio"));
-        p.setFechaRegistro(rs.getDate("fecha_registro"));
-        return p;
+        Producto producto = new Producto();
+        producto.setId(rs.getLong("id"));
+        producto.setNombre(rs.getString("nombre"));
+        producto.setPrecio(rs.getInt("precio"));
+        producto.setFechaRegistro(rs.getDate("fecha_registro"));
+        return producto;
     }
 }
