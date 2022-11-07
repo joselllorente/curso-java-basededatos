@@ -1,16 +1,35 @@
 package curso.java.jdbc.modelo;
 
 public class Alumno {
+	private Long id;
 	private String nombre;
 	private String apellidos;
 	private String dni;
+	private String user;
 
+	public Alumno() {
+		super();
+	}
 
-	public Alumno(String nombre, String apellidos, String dni) {
+	
+	
+	public Alumno(String nombre, String apellidos, String dni, String user) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.dni = dni;
+		this.user = user;
+	}
+
+
+
+	public Alumno(Long id, String nombre, String apellidos, String dni, String user) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.dni = dni;
+		this.user = user;
 	}
 
 	public String getNombre() {
@@ -32,15 +51,35 @@ public class Alumno {
 	public String getDni() {
 		return dni;
 	}
-
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Alumno [nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni +  "]";
+		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", user="
+				+ user + "]";
 	}
+
+	
 
 	
 	
