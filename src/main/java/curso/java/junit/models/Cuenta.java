@@ -50,15 +50,22 @@ public class Cuenta {
         this.saldo = this.saldo.add(cantidad);
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (!(obj instanceof Cuenta)) {
-//            return false;
-//        }
-//        Cuenta c = (Cuenta) obj;
-//        if (this.persona == null || this.saldo == null) {
-//            return false;
-//        }
-//        return this.persona.equals(c.getPersona()) && this.saldo.equals(c.getSaldo());
-//    }
+    
+    
+    @Override
+	public String toString() {
+		return "Cuenta [persona=" + persona + ", saldo=" + saldo + ", banco=" + banco + "]";
+	}
+
+	@Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Cuenta)) {
+            return false;
+        }
+        Cuenta c = (Cuenta) obj;
+        if (this.persona == null || this.saldo == null) {
+            return false;
+        }
+        return this.persona.equals(c.getPersona()) && this.saldo.equals(c.getSaldo());
+    }
 }

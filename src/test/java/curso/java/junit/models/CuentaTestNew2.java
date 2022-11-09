@@ -1,6 +1,7 @@
 package curso.java.junit.models;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,21 +17,30 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestReporter;
 
 import curso.java.junit.excepciones.DineroInsuficienteException;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CuentaTestNew2 {
 	Cuenta cuenta;
 
+	@BeforeAll
+	void iniciaConexion(){
+		System.out.println("Conectando con la base de datos");
+	}
+	
 	@BeforeEach
 	void initMetodoTest(TestInfo testInfo, TestReporter testReporter) {
+		System.out.println("Antes de la prueba");
 		this.cuenta = new Cuenta("Andres", new BigDecimal("1000.12345"));
 	}
 
 	@Test
 	@DisplayName("probando debito de la cuenta.")
 	void testDebitoCuenta() {
+		System.out.println("testDebitoCuenta");
 		cuenta.debito(new BigDecimal(100));
 		assertNotNull(cuenta.getSaldo());
 		assertEquals(900, cuenta.getSaldo().intValue());
@@ -41,6 +51,7 @@ public class CuentaTestNew2 {
 	@Tag("cuenta")
 	@DisplayName("probando credito de la cuenta.")
 	void testCreditoCuenta() {
+		System.out.println("testCreditoCuenta");
 		cuenta.credito(new BigDecimal(100));
 		assertNotNull(cuenta.getSaldo());
 		assertEquals(1100, cuenta.getSaldo().intValue());
@@ -53,6 +64,7 @@ public class CuentaTestNew2 {
 	// @Disabled
 	@DisplayName("probando excepcion dinero insuficiente.")
 	void testDineroInsuficienteExceptionCuenta() {
+		System.out.println("testDineroInsuficienteExceptionCuenta");
 		Exception exception = assertThrows(DineroInsuficienteException.class, () -> {
 			cuenta.debito(new BigDecimal(1500));
 		});
@@ -85,9 +97,7 @@ public class CuentaTestNew2 {
 						() -> "el valor del saldo de la cuenta1 no es el esperado."),
 				() -> assertEquals(2, banco.getCuentas().size(), () -> "el banco no tienes las cuentas esperadas"),
 				() -> assertEquals("Banco del Estado", cuenta1.getBanco().getNombre()),
-				() -> assertEquals("Andres",
-						banco.getCuentas().stream().filter(c -> c.getPersona().equals("Andres")).findFirst().get()
-								.getPersona()),
+				() -> assertEquals("Andres",banco.getCuentas().stream().filter(cuenta -> cuenta.getPersona().equals("Andres")).findFirst().get().getPersona()),
 				() -> assertTrue(banco.getCuentas().stream().anyMatch(c -> c.getPersona().equals("Jhon Doe"))));
 	}
 
@@ -96,10 +106,6 @@ public class CuentaTestNew2 {
 		System.out.println("finalizando el metodo de prueba.");
 	}
 
-	@BeforeAll
-	static void beforeAll() {
-		System.out.println("inicializando el test");
-	}
 
 	@AfterAll
 	static void afterAll() {

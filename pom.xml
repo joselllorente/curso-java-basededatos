@@ -12,11 +12,23 @@
 
 	<build>
 		<plugins>
-			<plugin>
+			<!--			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M7</version>
+				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
+					<includes>
+						<include>**/*TestNew*.java</include>
+					</includes>
+					
 				</configuration>
 			</plugin>
 			<plugin>
@@ -25,7 +37,7 @@
 				<version>2.6</version>
 				<configuration>
 					<finalName>cursomaven</finalName>
-					<outputDirectory>C:\Users\Formacion\Desktop</outputDirectory>
+					<outputDirectory>C:\Users\Formación\Desktop</outputDirectory>
 					<excludes>
 						<exclude>*.txt</exclude>
 						<exclude>*.jpg</exclude>
@@ -64,7 +76,9 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>5.6.3</version>
+			<scope>test</scope>
 		</dependency>
+
 
 	</dependencies>
 </project>
